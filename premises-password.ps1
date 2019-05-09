@@ -31,6 +31,7 @@ Invoke-Command -Session $session -ScriptBlock {
 		if ($resetuser) {
 			Set-AdAccountPassword $resetuser -Reset -NewPassword (ConvertTo-SecureString -AsPlainText "Welcome2019" -Force)
 			Set-ADUser $resetuser -ChangePasswordAtLogon $true
+		}
 	}
 } -ArgumentList $users
 
