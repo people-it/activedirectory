@@ -27,8 +27,10 @@ $session = New-PSSession -ComputerName $dc -Credential $adcredentials
 # Change passwords for each user based on list
 Invoke-Command -Session $session -ScriptBlock {
 	foreach($username in $args[0]) {
-		Set-AdAccountPassword -Identity $username -Reset -NewPassword (ConvertTo-SecureString -AsPlainText "Welcome2019" -Force)
-		Set-ADUser -ChangePasswordAtLogon $true
+		$resetuser = Get-ADUser $username
+		if ($resetuser) {
+			Set-AdAccountPassword $resetuser -Reset -NewPassword (ConvertTo-SecureString -AsPlainText "Welcome2019" -Force)
+			Set-ADUser $resetuser -ChangePasswordAtLogon $true
 	}
 } -ArgumentList $users
 
