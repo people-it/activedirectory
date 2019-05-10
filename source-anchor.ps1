@@ -22,7 +22,7 @@ Write-Host $AD_immutableID "<-- This is what the Cloud Immutable ID should look 
 
 # Look up the user in the Cloud
 $TT_ValidCloudUser = Get-MsolUser -UserPrincipalName $TT_UserPrincipalName 
-# Stick the Immutable ID of the Cloud account into another Variable
+# Put the Immutable ID of the Cloud account into another Variable
 $Cloud_ImmutableId = $TT_ValidCloudUser.ImmutableId
 
 Write-Host $Cloud_ImmutableId "<-- This is the Cloud Immutable ID "
@@ -30,4 +30,8 @@ Write-Host $Cloud_ImmutableId "<-- This is the Cloud Immutable ID "
 $update = Read-Host -prompt 'Would you like to update the Cloud Immutable ID for this user? (y/n)'
 
 if ($update -eq "y") {
-	Set-Msoluser -UserPrincipalName $TT_UserPrincipalName
+	Set-Msoluser -UserPrincipalName $TT_UserPrincipalName -ImmutableId $AD_immutableID
+	Write-Host "User Source Anchor has been updated."
+}
+Read-Host "Press any key to exit..."
+exit
