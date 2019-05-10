@@ -1,5 +1,7 @@
-# Connect to the Cloud. Un-Remark if needed.
-#Connect-MsolService
+#PeopleIT
+#
+#Use this script to find the on-premise AD account source anchor for a user when trying to match them to their MS Online user. Once you get the source anchor, you can run the set-msoluser -UserPrincipalName <email address> -ImmutableId <id from this script> to make sure there is a hard match when they are moved to the syncing OU.
+Connect-MsolService
 
 # Name of the person you are looking for in AD
 $TT_DomainUser = Read-Host -prompt 'Enter AD username' # Active Directory Account to look for.
