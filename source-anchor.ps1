@@ -26,3 +26,8 @@ $TT_ValidCloudUser = Get-MsolUser -UserPrincipalName $TT_UserPrincipalName
 $Cloud_ImmutableId = $TT_ValidCloudUser.ImmutableId
 
 Write-Host $Cloud_ImmutableId "<-- This is the Cloud Immutable ID "
+
+$update = Read-Host -prompt 'Would you like to update the Cloud Immutable ID for this user? (y/n)'
+
+if ($update -eq "y") {
+	Set-Msoluser -UserPrincipalName $TT_UserPrincipalName
